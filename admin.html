@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | Shree Swami Mauli Logistics</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3f8;
+}
+
+.login{
+width:380px;
+margin:100px auto;
+background:white;
+padding:35px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.login h2{
+text-align:center;
+margin-bottom:25px;
+color:#003366;
+}
+
+input{
+width:100%;
+padding:14px;
+margin:12px 0;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#ff9800;
+border:none;
+color:white;
+font-size:18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.dashboard{
+display:none;
+}
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:230px;
+height:100%;
+background:#003366;
+color:white;
+padding-top:25px;
+}
+
+.sidebar h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:15px 25px;
+}
+
+.sidebar a:hover{
+background:#0b4d91;
+}
+
+.main{
+margin-left:230px;
+padding:30px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+text-align:center;
+}
+
+.card h3{
+font-size:30px;
+color:#003366;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:18px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login" id="loginBox">
+
+<h2>Admin Login</h2>
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button onclick="login()">
+Login
+</button>
+
+</div>
+
+<div class="dashboard" id="dashboard">
+
+<div class="sidebar">
+
+<h2>🚚 SSM Admin</h2>
+
+<a href="#">Dashboard</a>
+
+<a href="#">Bookings</a>
+
+<a href="#">Tracking</a>
+
+<a href="#">Customers</a>
+
+<a href="#">Drivers</a>
+
+<a href="#">Invoices</a>
+
+<a href="#">Reports</a>
+
+<a href="#" onclick="logout()">Logout</a>
+
+</div>
+
+<div class="main">
+
+<h1>Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>145</h3>
+<p>Total Bookings</p>
+</div>
+
+<div class="card">
+<h3>39</h3>
+<p>In Transit</p>
+</div>
+
+<div class="card">
+<h3>92</h3>
+<p>Delivered</p>
+</div>
+
+<div class="card">
+<h3>14</h3>
+<p>Pending</p>
+</div>
+
+</div><h2 style="margin-top:40px;">Recent Bookings</h2>
+
+<input
+type="text"
+id="search"
+placeholder="Search Booking ID..."
+style="width:300px;margin:20px 0;padding:10px;">
+
+<table style="width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.1);">
+
+<tr style="background:#003366;color:white;">
+<th style="padding:12px;">Booking ID</th>
+<th>Customer</th>
+<th>From</th>
+<th>To</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td style="padding:12px;">SSM100001</td>
+<td>Rahul Sharma</td>
+<td>Pune</td>
+<td>Mumbai</td>
+<td>
+<select>
+<option>Pending</option>
+<option selected>In Transit</option>
+<option>Delivered</option>
+</select>
+</td>
+<td><button style="padding:8px 12px;width:auto;">Update</button></td>
+</tr>
+
+<tr>
+<td style="padding:12px;">SSM100002</td>
+<td>Amit Patil</td>
+<td>Nashik</td>
+<td>Nagpur</td>
+<td>
+<select>
+<option>Pending</option>
+<option>In Transit</option>
+<option selected>Delivered</option>
+</select>
+</td>
+<td><button style="padding:8px 12px;width:auto;">Update</button></td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="admin123"){
+
+document.getElementById("loginBox").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+}else{
+
+alert("Invalid Username or Password");
+
+}
+
+}
+
+function logout(){
+
+document.getElementById("dashboard").style.display="none";
+
+document.getElementById("loginBox").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
