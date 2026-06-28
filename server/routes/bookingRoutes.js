@@ -80,7 +80,7 @@ router.get("/", auth, admin, async (req, res) => {
 
 // Get Booking by Booking ID
 
-router.get("/:bookingId", async (req,res)=>{
+router.put("/:bookingId", auth, admin, async (req, res) => {
 
     try{
 
