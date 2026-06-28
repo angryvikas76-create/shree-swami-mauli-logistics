@@ -1,31 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Book Shipment</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Shipment | Shree Swami Mauli Logistics</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f7fa;
+margin:0;
+}
+
+header{
+background:#003366;
+color:#fff;
+padding:18px;
+text-align:center;
+}
+
+.container{
+max-width:700px;
+margin:30px auto;
+background:#fff;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+h2{
+text-align:center;
+color:#003366;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin-top:8px;
+margin-bottom:18px;
+border:1px solid #ccc;
+border-radius:5px;
+font-size:16px;
+}
+
+button{
+width:100%;
+background:#ff9800;
+color:#fff;
+padding:14px;
+border:none;
+border-radius:5px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#e68900;
+}
+
+.success{
+display:none;
+margin-top:20px;
+padding:15px;
+background:#d4edda;
+color:#155724;
+border-radius:5px;
+font-weight:bold;
+}
+
+a{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+color:#003366;
+font-weight:bold;
+}
+</style>
+
 </head>
 <body>
-    <h1>Book Your Shipment</h1>
 
-    <form>
-        <label>Customer Name</label><br>
-        <input type="text"><br><br>
+<header>
+<h1>Shree Swami Mauli Logistics</h1>
+</header>
 
-        <label>Mobile Number</label><br>
-        <input type="tel"><br><br>
+<div class="container">
 
-        <label>Pickup Address</label><br>
-        <textarea></textarea><br><br>
+<h2>Shipment Booking Form</h2>
 
-        <label>Delivery Address</label><br>
-        <textarea></textarea><br><br>
+<form id="bookingForm">
 
-        <label>Parcel Weight (kg)</label><br>
-        <input type="number"><br><br>
+<input type="text" placeholder="Customer Name" required>
 
-        <button type="submit">Book Shipment</button>
-    </form>
+<input type="tel" placeholder="Mobile Number" required>
 
-    <br>
-    <a href="index.html">Back to Home</a>
+<input type="email" placeholder="Email Address">
+
+<textarea placeholder="Pickup Address" required></textarea>
+
+<textarea placeholder="Delivery Address" required></textarea>
+
+<select required>
+<option value="">Parcel Type</option>
+<option>Documents</option>
+<option>Electronics</option>
+<option>Furniture</option>
+<option>Industrial Goods</option>
+<option>Other</option>
+</select>
+
+<input type="number" placeholder="Weight (Kg)" required>
+
+<input type="date" required>
+
+<select required>
+<option value="">Vehicle Required</option>
+<option>Mini Truck</option>
+<option>Pickup</option>
+<option>Container</option>
+<option>Trailer</option>
+</select>
+
+<textarea placeholder="Special Instructions"></textarea>
+
+<button type="submit">Book Shipment</button>
+
+</form>
+
+<div class="success" id="successMsg"></div>
+
+<a href="index.html">⬅ Back to Home</a>
+
+</div>
+
+<script>
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const bookingId="SSM"+Math.floor(Math.random()*900000+100000);
+
+document.getElementById("successMsg").style.display="block";
+document.getElementById("successMsg").innerHTML=
+"✅ Booking Successful!<br><br>Your Booking ID: <b>"+bookingId+"</b><br><br>Please save this ID for tracking.";
+
+this.reset();
+
+});
+</script>
+
 </body>
 </html>
