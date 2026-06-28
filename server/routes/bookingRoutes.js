@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
 
 // Get All Bookings
 
-router.get("/", async (req, res) => {
+router.get("/", auth, admin, async (req, res) => {
 
     try {
 
