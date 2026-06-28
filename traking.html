@@ -133,6 +133,7 @@ padding:20px;
 <body>
 
 <header>
+  
 
 <div class="logo">
 🚚 Shree Swami Mauli Logistics
@@ -173,3 +174,111 @@ Track Shipment
 </button>
 
 <div id="result" class="result">
+  <h3>Shipment Details</h3>
+
+<table>
+
+<tr>
+<td><b>Booking ID</b></td>
+<td id="bookingId"></td>
+</tr>
+
+<tr>
+<td><b>Customer</b></td>
+<td>Rahul Sharma</td>
+</tr>
+
+<tr>
+<td><b>From</b></td>
+<td>Pune</td>
+</tr>
+
+<tr>
+<td><b>To</b></td>
+<td>Mumbai</td>
+</tr>
+
+<tr>
+<td><b>Boxes</b></td>
+<td>12</td>
+</tr>
+
+<tr>
+<td><b>Weight</b></td>
+<td>245 Kg</td>
+</tr>
+
+<tr>
+<td><b>Expected Delivery</b></td>
+<td>30 June 2026</td>
+</tr>
+
+</table>
+
+<div class="progress">
+
+<h3 style="margin-bottom:15px;">Shipment Progress</h3>
+
+<div class="step done">
+✅ Booking Confirmed
+</div>
+
+<div class="step done">
+📦 Shipment Picked Up
+</div>
+
+<div class="step done">
+🚚 In Transit
+</div>
+
+<div class="step pending">
+📍 Out For Delivery
+</div>
+
+<div class="step pending">
+🎉 Delivered
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>Shree Swami Mauli Logistics</h3>
+
+<p>Fast • Safe • Reliable Logistics Services</p>
+
+<p>© 2026 All Rights Reserved.</p>
+
+</footer>
+
+<script>
+
+function trackShipment(){
+
+let id=document.getElementById("trackId").value.trim();
+
+if(id===""){
+alert("Please enter Booking ID");
+return;
+}
+
+document.getElementById("bookingId").innerHTML=id;
+
+document.getElementById("result").style.display="block";
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
