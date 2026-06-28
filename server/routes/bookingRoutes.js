@@ -1,7 +1,9 @@
-const auth = require("../middleware/auth");
-const admin = require("../middleware/admin");
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
+const Booking = require("../models/Booking");
+
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
 const router = express.Router();
 
