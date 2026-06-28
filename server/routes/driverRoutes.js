@@ -1,51 +1,22 @@
 const express = require("express");
-const Driver = require("../models/Driver");
 
 const router = express.Router();
 
-// Get All Drivers
-router.get("/", async (req, res) => {
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 
-    try {
+const driverController = require("../controllers/driverController");
 
-        const drivers = await Driver.find();
+// Get all drivers
+router.get("/", auth, admin, driverController.getDrivers);
 
-        res.json(drivers);
+// Add new driver
+router.post("/", auth, admin, driverController.addDriver);
 
-    } catch (err) {
+// Update driver
+router.put("/:id", auth, admin, driverController.updateDriver);
 
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
-
-    }
-
-});
-
-// Add Driver
-router.post("/", async (req, res) => {
-
-    try {
-
-        const driver = new Driver(req.body);
-
-        await driver.save();
-
-        res.status(201).json({
-            success: true,
-            driver
-        });
-
-    } catch (err) {
-
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
-
-    }
-
-});
+// Delete driver
+router.delete("/:id", auth, admin, driverController.deleteDriver);
 
 module.exports = router;
