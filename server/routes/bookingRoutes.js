@@ -142,7 +142,7 @@ router.put("/:bookingId", async (req,res)=>{
 
 // Delete Booking
 
-router.delete("/:bookingId", async (req,res)=>{
+router.delete("/:bookingId", auth, admin, async (req, res) => {
 
     try{
 
