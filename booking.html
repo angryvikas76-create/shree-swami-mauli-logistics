@@ -170,6 +170,7 @@ padding:20px;
 
 <input
 type="text"
+id="senderName"
 placeholder="Enter Sender Name"
 required>
 
@@ -181,6 +182,7 @@ required>
 
 <input
 type="tel"
+id="senderMobile"
 placeholder="Enter Mobile Number"
 required>
 
@@ -191,6 +193,7 @@ required>
 <label>Pickup Address</label>
 
 <textarea
+id="pickupAddress"
 placeholder="Enter Complete Pickup Address"
 required></textarea>
 
@@ -206,6 +209,7 @@ required></textarea>
 
 <input
 type="text"
+id="receiverName"
 placeholder="Enter Receiver Name"
 required>
 
@@ -217,6 +221,7 @@ required>
 
 <input
 type="tel"
+id="receiverMobile"
 placeholder="Enter Mobile Number"
 required>
 
@@ -227,16 +232,16 @@ required>
 <label>Delivery Address</label>
 
 <textarea
+id="deliveryAddress"
 placeholder="Enter Complete Delivery Address"
-required></textarea><div class="section-title">
-📦 Shipment Details
+required></textarea>
 </div>
 
 <div class="grid">
 
 <div>
 <label>Parcel Type</label>
-<select required>
+<select id="parcelType" required>
 <option value="">Select Parcel Type</option>
 <option>Documents</option>
 <option>Electronics</option>
@@ -250,27 +255,48 @@ required></textarea><div class="section-title">
 
 <div>
 <label>Number of Boxes</label>
-<input type="number" placeholder="Enter Number of Boxes" required>
+<input
+type="number"
+id="numberOfBoxes"
+placeholder="Enter Number of Boxes"
+required>
 </div>
 
 <div>
 <label>Total Weight (Kg)</label>
-<input type="number" step="0.01" placeholder="Enter Weight" required>
+<input
+type="number"
+id="weight"
+step="0.01"
+placeholder="Enter Weight"
+required>
 </div>
 
 <div>
 <label>Length (cm)</label>
-<input type="number" placeholder="Length" required>
+<input
+type="number"
+id="length"
+placeholder="Length"
+required>
 </div>
 
 <div>
 <label>Width (cm)</label>
-<input type="number" placeholder="Width" required>
+<input
+type="number"
+id="width"
+placeholder="Width"
+required>
 </div>
 
 <div>
 <label>Height (cm)</label>
-<input type="number" placeholder="Height" required>
+<input
+type="number"
+id="height"
+placeholder="Height"
+required>
 </div>
 
 <div>
@@ -285,7 +311,7 @@ required></textarea><div class="section-title">
 
 <div>
 <label>Payment Mode</label>
-<select required>
+<select id="paymentMode" required>
 <option>Cash</option>
 <option>UPI</option>
 <option>Bank Transfer</option>
