@@ -191,4 +191,10 @@ router.get("/recent", auth, admin, async (req, res) => {
     }
 
 });
+router.patch(
+    "/:bookingId/status",
+    auth,
+    admin,
+    bookingController.changeStatus
+);
 module.exports = router;
