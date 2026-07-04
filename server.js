@@ -15,3 +15,5 @@ app.use("/api/invoice", require("./routes/invoiceRoutes"));
 app.use("/api/qr", require("./routes/qrRoutes"));
 
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+
+app.use("/api/status", require("./routes/statusRoutes"));
