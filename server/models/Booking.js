@@ -76,7 +76,15 @@ amount: {
     type: String,
     default: "Booking Confirmed"
   },
+driverName: {
+    type: String,
+    default: ""
+},
 
+driverMobile: {
+    type: String,
+    default: ""
+},
   createdAt: {
     type: Date,
     default: Date.now
