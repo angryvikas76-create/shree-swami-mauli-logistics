@@ -15,6 +15,22 @@ exports.createBooking = async (req, res) => {
     return res.status(400).json({
         success: false,
         message: "Please fill all required fields."
+            
+        const booking = new Booking({
+            bookingId: "SSM-" + uuidv4().substring(0, 8).toUpperCase(),
+            senderName: req.body.senderName,
+            senderMobile: req.body.senderMobile,
+            receiverName: req.body.receiverName,
+            receiverMobile: req.body.receiverMobile,
+            pickupAddress: req.body.pickupAddress,
+            deliveryAddress: req.body.deliveryAddress,
+            parcelType: req.body.parcelType,
+            numberOfBoxes: req.body.numberOfBoxes,
+            weight: req.body.weight,
+            length: req.body.length,
+            width: req.body.width,
+            height: req.body.height,
+            status: "Booking Confirmed"
     });
         }
         });
