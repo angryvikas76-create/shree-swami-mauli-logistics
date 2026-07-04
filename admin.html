@@ -43,15 +43,20 @@ font-size:16px;
 }
 
 button{
-width:100%;
-padding:14px;
-background:#ff9800;
-border:none;
-color:white;
-font-size:18px;
-border-radius:6px;
-cursor:pointer;
-}
+<td>
+
+<select onchange="updateStatus('${booking.bookingId}',this.value)">
+
+<option ${booking.status=="Pending"?"selected":""}>Pending</option>
+
+<option ${booking.status=="In Transit"?"selected":""}>In Transit</option>
+
+<option ${booking.status=="Delivered"?"selected":""}>Delivered</option>
+
+</select>
+
+</td>
+          }
 
 .dashboard{
 display:none;
