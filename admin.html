@@ -374,6 +374,69 @@ async function updateStatus(bookingId,status){
     }
 
 }
+            async function assignDriver(bookingId){
+
+    const driverName = prompt("Enter Driver Name");
+
+    if(!driverName) return;
+
+    const driverMobile = prompt("Enter Driver Mobile");
+
+    if(!driverMobile) return;
+
+    const token = localStorage.getItem("token");
+
+    try{
+
+        const response = await fetch(
+
+            API_URL + "/bookings/" + bookingId + "/driver",
+
+            {
+
+                method:"PATCH",
+
+                headers:{
+
+                    "Content-Type":"application/json",
+
+                    Authorization:"Bearer "+token
+
+                },
+
+                body:JSON.stringify({
+
+                    driverName,
+
+                    driverMobile
+
+                })
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        if(result.success){
+
+            alert("Driver assigned successfully.");
+
+            loadBookings();
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }catch(error){
+
+        alert("Unable to assign driver.");
+
+    }
+
+            }
   </script>
 
 </body>
