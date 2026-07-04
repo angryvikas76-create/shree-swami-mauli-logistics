@@ -209,26 +209,10 @@ style="width:300px;margin:20px 0;padding:10px;">
 <th>Action</th>
 </tr>
 
-<tr>
-<td style="padding:12px;">SSM100001</td>
-<td>Rahul Sharma</td>
-<td>Pune</td>
-<td>Mumbai</td>
-<td>
-<select>
-<option>Pending</option>
-<option selected>In Transit</option>
-<option>Delivered</option>
-</select>
-</td>
-<td><button style="padding:8px 12px;width:auto;">Update</button></td>
-</tr>
-
-<tr>
-<td style="padding:12px;">SSM100002</td>
-<td>Amit Patil</td>
-<td>Nashik</td>
-<td>Nagpur</td>
+<tbody 
+  id="bookingTable">
+</tbody>
+  
 <td>
 <select>
 <option>Pending</option>
@@ -275,6 +259,63 @@ document.getElementById("loginBox").style.display="block";
 }
 
 </script>
+
+  <script>
+
+async function loadBookings() {
+
+    try {
+
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+            "http://localhost:5000/api/dashboard/recent-bookings",
+            {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if (!result.success) return;
+
+        let html = "";
+
+        result.bookings.forEach(booking => {
+
+            html += `
+            <tr>
+
+                <td>${booking.bookingId}</td>
+
+                <td>${booking.senderName}</td>
+
+                <td>${booking.pickupAddress}</td>
+
+                <td>${booking.deliveryAddress}</td>
+
+                <td>${booking.status}</td>
+
+            </tr>
+            `;
+
+        });
+
+        document.getElementById("bookingTable").innerHTML = html;
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+loadBookings();
+
+  </script>
 
 </body>
 </html>
