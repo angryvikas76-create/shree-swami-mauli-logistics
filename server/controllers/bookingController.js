@@ -184,6 +184,48 @@ exports.changeStatus = async (req, res) => {
     }
 
 };
+exports.assignDriver = async (req, res) => {
+
+    try {
+
+        const booking = await Booking.findOneAndUpdate(
+
+            { bookingId: req.params.bookingId },
+
+            {
+                driverName: req.body.driverName,
+                driverMobile: req.body.driverMobile
+            },
+
+            { new: true }
+
+        );
+
+        if (!booking) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Booking not found."
+            });
+
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Driver assigned successfully.",
+            booking
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
 
 // Delete booking
 exports.deleteBooking = async (req, res) => {
