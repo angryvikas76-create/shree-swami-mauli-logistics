@@ -319,7 +319,61 @@ async function loadBookings() {
 }
 
 loadBookings();
+async function updateStatus(bookingId,status){
 
+    const token = localStorage.getItem("token");
+
+    try{
+
+        const response = await fetch(
+
+            API_URL + "/bookings/" + bookingId + "/status",
+
+            {
+
+                method:"PATCH",
+
+                headers:{
+
+                    "Content-Type":"application/json",
+
+                    Authorization:"Bearer "+token
+
+                },
+
+                body:JSON.stringify({
+
+                    status
+
+                })
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        if(result.success){
+
+            alert("Shipment status updated successfully.");
+
+            loadBookings();
+
+            loadDashboard();
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }catch(error){
+
+        alert("Unable to update shipment.");
+
+    }
+
+}
   </script>
 
 </body>
