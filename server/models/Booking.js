@@ -23,7 +23,20 @@ const bookingSchema = new mongoose.Schema({
     required: true
   },
 
-  receiverMobile: {
+  receiverMobile: {email: {
+    type: String,
+    required: true
+},
+
+paymentMode: {
+    type: String,
+    default: "Cash"
+},
+
+amount: {
+    type: Number,
+    default: 0
+},
     type: String,
     required: true
   },
