@@ -197,4 +197,10 @@ router.patch(
     admin,
     bookingController.changeStatus
 );
+router.patch(
+    "/:bookingId/driver",
+    auth,
+    admin,
+    bookingController.assignDriver
+);
 module.exports = router;
