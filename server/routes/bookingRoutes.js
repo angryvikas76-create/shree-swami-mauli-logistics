@@ -167,4 +167,28 @@ router.delete("/:bookingId", auth, admin, async (req, res) => {
 
 });
 
+// Get Recent Bookings
+router.get("/recent", auth, admin, async (req, res) => {
+
+    try {
+
+        const bookings = await Booking.find()
+            .sort({ createdAt: -1 })
+            .limit(10);
+
+        res.status(200).json({
+            success: true,
+            bookings
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
 module.exports = router;
