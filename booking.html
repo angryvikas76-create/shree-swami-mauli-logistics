@@ -356,25 +356,99 @@ style="display:none;margin-top:25px;padding:20px;background:#d4edda;color:#15572
 
 <script>
 
-document.getElementById("bookingForm").addEventListener("submit",function(e){
+document.getElementById("bookingForm").addEventListener("submit", async function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-let booking="SSM"+Math.floor(Math.random()*900000+100000);
+    const button = document.querySelector(".next-btn");
 
-let msg=document.getElementById("success");
+    button.disabled = true;
+    button.innerHTML = "Booking Shipment...";
 
-msg.style.display="block";
+    const bookingData = {
 
-msg.innerHTML=
-"✅ Booking Submitted Successfully!<br><br><b>Booking ID : "+booking+"</b><br><br>Please save this Booking ID for shipment tracking.";
+        senderName: document.getElementById("senderName").value,
 
-this.reset();
+        senderMobile: document.getElementById("senderMobile").value,
 
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:"smooth"
-});
+        receiverName: document.getElementById("receiverName").value,
+
+        receiverMobile: document.getElementById("receiverMobile").value,
+
+        pickupAddress: document.getElementById("pickupAddress").value,
+
+        deliveryAddress: document.getElementById("deliveryAddress").value,
+
+        email: document.getElementById("email").value,
+
+        parcelType: document.getElementById("parcelType").value,
+
+        numberOfBoxes: Number(document.getElementById("numberOfBoxes").value),
+
+        weight: Number(document.getElementById("weight").value),
+
+        length: Number(document.getElementById("length").value),
+
+        width: Number(document.getElementById("width").value),
+
+        height: Number(document.getElementById("height").value),
+
+        paymentMode: document.getElementById("paymentMode").value
+
+    };
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/bookings",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(bookingData)
+
+        });
+
+        const result = await response.json();
+
+        if(result.success){
+
+            const msg = document.getElementById("success");
+
+            msg.style.display="block";
+
+            msg.innerHTML=`
+                ✅ <b>Booking Successful!</b><br><br>
+
+                Booking ID:
+                <b>${result.booking.bookingId}</b><br><br>
+
+                Please save this Booking ID for tracking your shipment.
+            `;
+
+            this.reset();
+
+            window.scrollTo({
+                top:document.body.scrollHeight,
+                behavior:"smooth"
+            });
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }catch(error){
+
+        alert("Cannot connect to the server. Please try again.");
+
+    }
+
+    button.disabled=false;
+    button.innerHTML="Book Shipment";
 
 });
 
