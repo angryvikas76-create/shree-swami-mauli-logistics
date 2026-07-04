@@ -145,6 +145,45 @@ exports.updateBookingStatus = async (req, res) => {
     }
 
 };
+exports.changeStatus = async (req, res) => {
+
+    try {
+
+        const booking = await Booking.findOneAndUpdate(
+
+            { bookingId: req.params.bookingId },
+
+            { status: req.body.status },
+
+            { new: true }
+
+        );
+
+        if (!booking) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Booking not found."
+            });
+
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Shipment status updated.",
+            booking
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
 
 // Delete booking
 exports.deleteBooking = async (req, res) => {
