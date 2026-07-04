@@ -22,6 +22,8 @@ exports.trackShipment = async (req, res) => {
                 bookingId: booking.bookingId,
                 senderName: booking.senderName,
                 receiverName: booking.receiverName,
+                driverName: booking.driverName,
+                driverMobile: booking.driverMobile,
                 pickupAddress: booking.pickupAddress,
                 deliveryAddress: booking.deliveryAddress,
                 parcelType: booking.parcelType,
