@@ -4,21 +4,19 @@ const { v4: uuidv4 } = require("uuid");
 // Create a new booking
 exports.createBooking = async (req, res) => {
     try {
-        const booking = new Booking({
-            bookingId: "SSM-" + uuidv4().substring(0, 8).toUpperCase(),
-            senderName: req.body.senderName,
-            senderMobile: req.body.senderMobile,
-            receiverName: req.body.receiverName,
-            receiverMobile: req.body.receiverMobile,
-            pickupAddress: req.body.pickupAddress,
-            deliveryAddress: req.body.deliveryAddress,
-            parcelType: req.body.parcelType,
-            numberOfBoxes: req.body.numberOfBoxes,
-            weight: req.body.weight,
-            length: req.body.length,
-            width: req.body.width,
-            height: req.body.height,
-            status: "Booking Confirmed"
+        if (
+    !req.body.senderName ||
+    !req.body.senderMobile ||
+    !req.body.receiverName ||
+    !req.body.receiverMobile ||
+    !req.body.pickupAddress ||
+    !req.body.deliveryAddress
+) {
+    return res.status(400).json({
+        success: false,
+        message: "Please fill all required fields."
+    });
+        }
         });
 
         await booking.save();
