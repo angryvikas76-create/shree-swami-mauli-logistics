@@ -61,3 +61,27 @@ exports.getDashboard = async (req, res) => {
     }
 
 };
+
+exports.getRecentBookings = async (req, res) => {
+
+    try {
+
+        const bookings = await Booking.find()
+            .sort({ createdAt: -1 })
+            .limit(10);
+
+        res.status(200).json({
+            success: true,
+            bookings
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+};
