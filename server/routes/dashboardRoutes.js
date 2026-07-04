@@ -15,3 +15,10 @@ router.get(
 );
 
 module.exports = router;
+
+router.get(
+    "/recent-bookings",
+    auth,
+    admin,
+    dashboardController.getRecentBookings
+);
