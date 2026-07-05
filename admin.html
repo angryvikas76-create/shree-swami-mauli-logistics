@@ -780,3 +780,58 @@ async function changeStatus(bookingId){
     }
 
 }
+document.getElementById("search").addEventListener("keyup",function(){
+
+    const value=this.value.toLowerCase();
+
+    const rows=document.querySelectorAll("#bookingTable tr");
+
+    rows.forEach(row=>{
+
+        if(row.innerText.toLowerCase().includes(value)){
+
+            row.style.display="";
+
+        }else{
+
+            row.style.display="none";
+
+        }
+
+    });
+
+});
+
+function logout(){
+
+    localStorage.removeItem("token");
+
+    document.getElementById("dashboard").style.display="none";
+
+    document.getElementById("loginPage").style.display="flex";
+
+}
+
+window.onload=function(){
+
+    const token=localStorage.getItem("token");
+
+    if(token){
+
+        document.getElementById("loginPage").style.display="none";
+
+        document.getElementById("dashboard").style.display="block";
+
+        loadDashboard();
+
+        loadBookings();
+
+    }
+
+};
+
+</script>
+
+</body>
+
+</html>
