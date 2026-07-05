@@ -579,3 +579,204 @@ async function loadDashboard(){
     }
 
 }
+  async function loadBookings(){
+
+    try{
+
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+            API_URL + "/dashboard/recent-bookings",
+            {
+                headers:{
+                    Authorization:"Bearer "+token
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if(!result.success) return;
+
+        let html = "";
+
+        result.bookings.forEach(booking=>{
+
+            let statusClass="pending";
+
+            if(booking.status==="In Transit"){
+                statusClass="transit";
+            }
+
+            if(booking.status==="Delivered"){
+                statusClass="delivered";
+            }
+
+            html += `
+
+<tr>
+
+<td>${booking.bookingId}</td>
+
+<td>${booking.senderName}</td>
+
+<td>${booking.pickupAddress}</td>
+
+<td>${booking.deliveryAddress}</td>
+
+<td>
+
+<span class="status ${statusClass}">
+${booking.status}
+</span>
+
+</td>
+
+<td>
+
+${booking.driverName || "Not Assigned"}
+
+</td>
+
+<td>
+
+<button
+class="action-btn"
+onclick="assignDriver('${booking.bookingId}')">
+
+Assign Driver
+
+</button>
+
+<button
+class="action-btn"
+onclick="changeStatus('${booking.bookingId}')">
+
+Update Status
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+        });
+
+        document.getElementById("bookingTable").innerHTML = html;
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+async function assignDriver(bookingId){
+
+    const driverName = prompt("Driver Name");
+
+    if(!driverName) return;
+
+    const driverMobile = prompt("Driver Mobile");
+
+    if(!driverMobile) return;
+
+    const token = localStorage.getItem("token");
+
+    try{
+
+        const response = await fetch(
+
+            API_URL + "/bookings/" + bookingId + "/driver",
+
+            {
+
+                method:"PATCH",
+
+                headers:{
+
+                    "Content-Type":"application/json",
+
+                    Authorization:"Bearer "+token
+
+                },
+
+                body:JSON.stringify({
+
+                    driverName,
+                    driverMobile
+
+                })
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        loadBookings();
+
+    }catch(error){
+
+        alert("Unable to assign driver.");
+
+    }
+
+}
+
+async function changeStatus(bookingId){
+
+    const status = prompt("Enter Status:\nPending\nIn Transit\nDelivered");
+
+    if(!status) return;
+
+    const token = localStorage.getItem("token");
+
+    try{
+
+        const response = await fetch(
+
+            API_URL + "/bookings/" + bookingId + "/status",
+
+            {
+
+                method:"PATCH",
+
+                headers:{
+
+                    "Content-Type":"application/json",
+
+                    Authorization:"Bearer "+token
+
+                },
+
+                body:JSON.stringify({
+
+                    status
+
+                })
+
+            }
+
+        );
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        loadBookings();
+
+        loadDashboard();
+
+    }catch(error){
+
+        alert("Unable to update status.");
+
+    }
+
+}
