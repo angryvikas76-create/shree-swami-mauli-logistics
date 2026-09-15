@@ -7,8 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-});
-
+// CORS
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -27,22 +26,23 @@ app.use((req, res, next) => {
     next();
 });
 
+// Connect MongoDB
 connectDB();
 
+// Server
 app.listen(process.env.PORT || 5000, () => {
-    console.log(`🚀 Server running on port ${process.env.PORT || 5000}`);
+    console.log(
+        `🚀 Server running on port ${process.env.PORT || 5000}`
+    );
 });
 
+// Uploads
 app.use("/uploads", express.static("uploads"));
 
+// Routes
 app.use("/api/upload", require("./routes/uploadRoutes"));
-
 app.use("/api/bookings", require("./routes/bookingRoutes"));
-
 app.use("/api/invoice", require("./routes/invoiceRoutes"));
-
 app.use("/api/qr", require("./routes/qrRoutes"));
-
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
-
 app.use("/api/status", require("./routes/statusRoutes"));
